@@ -1,251 +1,181 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HUMO Token — Стабильный токен на Solana</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f8fb;
+  --ink: #0e1116;
+  --muted: #5b6472;
+  --line: #e6e9ef;
+  --accent: #00c389;        /* HUMO green */
+  --accent-2: #0a2540;      /* deep navy */
+  --card: #ffffff;
+  --radius: 20px;
+  --shadow: 0 10px 30px rgba(10,37,64,.08);
+}
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <h1>Стабильный токен на блокчейне Solana</h1>
-      <p class="subtitle">
-        Новый крипто-актив для финансовой экосистемы Humo token, который делает
-        операции безопасными, быстрыми и прозрачными.
-      </p>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-label">номинал одного токена</span>
-          <span class="stat-value">1 USD</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">обеспечение выпуска</span>
-          <span class="stat-value">100%</span>
-        </div>
-        <div class="stat">
-          <span class="stat-label">выпуск и погашение</span>
-          <span class="stat-value">1:1</span>
-        </div>
-      </div>
-    </div>
-  </header>
+html { scroll-behavior: smooth; }
 
-  <!-- ABOUT -->
-  <section class="about">
-    <div class="container">
-      <h2>HUMO Token — это обеспеченный стабильный токен, выпущенный на Solana</h2>
-      <p>
-        Он полностью обеспечен резервами в стейблкоинах и фиатных активах,
-        номинированных в долларах США, что исключает валютные риски и
-        обеспечивает надежный контроль над стабильным токеном.
-      </p>
-      <p>
-        Выпуск и оборот HUMO Token регулируются и контролируются в соответствии
-        с правилами экосистемы Humo token.
-      </p>
-    </div>
-  </section>
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  <!-- WHAT'S BEHIND -->
-  <section class="behind">
-    <div class="container">
-      <h2>Что стоит за стабильным токеном</h2>
-      <p>
-        HUMO Token — обеспеченный стабильный токен, выпущенный на блокчейне
-        Solana. За каждым выпущенным токеном стоит реальный резерв, а не
-        рыночный актив.
-      </p>
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
-      <div class="cards">
-        <div class="card">
-          <h3>Резервы</h3>
-          <p><strong>100%</strong> — проверки внутренние и внешние</p>
-        </div>
-        <div class="card">
-          <h3>Номинал</h3>
-          <p><strong>1:1</strong> — к доллару, не зависит от рынка</p>
-        </div>
-        <div class="card">
-          <h3>Эмитент</h3>
-          <p><strong>HUMO DIGITAL</strong> — учредитель Humo token</p>
-        </div>
-      </div>
-    </div>
-  </section>
+h1, h2, h3 { line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
+h2 { font-size: 2.2rem; margin-bottom: 16px; }
+h3 { font-size: 1.15rem; margin-bottom: 8px; }
+p  { color: var(--muted); }
 
-  <!-- ADVANTAGES -->
-  <section class="advantages">
-    <div class="container">
-      <h2>Ключевые преимущества</h2>
+.section-lead { max-width: 720px; margin-bottom: 40px; }
 
-      <div class="adv-grid">
-        <div class="adv">
-          <h3>Надежность</h3>
-          <p>
-            Каждый HUMO Token обеспечен резервами. Обеспечение регулярно
-            подтверждается внутренними и внешними аудитами.
-          </p>
-          <div class="balance">HUMO Token 42.50 HUMO</div>
-        </div>
+/* NAVBAR */
+.navbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark { width: 32px; height: 32px; }
+.logo-text { font-weight: 700; font-size: 1.05rem; }
+.logo-text b { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem;
+}
+.nav-links a:hover { color: var(--accent); }
 
-        <div class="adv">
-          <h3>Инновационная платформа</h3>
-          <p>
-            Мы используем возможности Solana, чтобы обеспечить максимальную
-            скорость, низкие комиссии и безопасность работы HUMO Token.
-          </p>
-        </div>
+/* BUTTONS */
+.btn {
+  display: inline-block; padding: 12px 24px; border-radius: 10px;
+  font-weight: 600; text-decoration: none; transition: all .2s;
+  font-size: .95rem;
+}
+.btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+.btn-outline:hover { background: var(--ink); color: #fff; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 
-        <div class="adv">
-          <h3>Прозрачность</h3>
-          <p>
-            Вся информация о транзакциях HUMO Token открыто доступна в
-            распределенном реестре Solana.
-          </p>
-          <p>
-            HUMO Token зарегистрирован в реестре крипто-активов Humo token.
-          </p>
-          <p>
-            Данные о стабильном токене также размещены в крипто-депозитарии
-            Solana, что обеспечивает его полную проверяемость и прозрачность.
-          </p>
-        </div>
+/* HERO */
+.hero {
+  position: relative; padding: 120px 0 100px; overflow: hidden;
+  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
+}
+.hero-bg {
+  position: absolute; inset: 0; opacity: .18; pointer-events: none;
+}
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-inner { position: relative; text-align: center; }
+.hero h1 { font-size: 3.4rem; margin-bottom: 22px; }
+.hero .subtitle {
+  max-width: 640px; margin: 0 auto 56px; font-size: 1.1rem; color: var(--muted);
+}
 
-        <div class="adv">
-          <h3>Простое использование</h3>
-          <p>
-            HUMO Token легко интегрируется с экосистемой Solana. Приобрести и
-            погасить HUMO Token можно напрямую через Solana Wallet, банк-партнёр
-            или уполномоченного провайдера — быстро, удобно и безопасно.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+.stats {
+  display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat-label { color: var(--muted); font-size: .85rem; margin-bottom: 8px; text-align: center; }
+.stat-value { font-size: 2rem; font-weight: 800; color: var(--accent-2); }
 
-  <!-- BRIDGE -->
-  <section class="bridge">
-    <div class="container">
-      <h2>Мы строим мост между традиционными финансами и цифровым будущим</h2>
-      <a href="#contact" class="btn">Свяжитесь с нами</a>
-    </div>
-  </section>
+/* SECTION BASE */
+section { padding: 90px 0; }
+.about, .usecases { background: #fff; }
+.behind, .advantages, .faq { background: var(--bg-soft); }
 
-  <!-- USE CASES -->
-  <section class="usecases">
-    <div class="container">
-      <h2>Один токен — разные задачи</h2>
-      <p>
-        Инструмент рассчитан и на бизнес, и на частных пользователей: расчётная
-        единица в долларах, движение которой видно в реестре Solana.
-      </p>
+/* TWO COL */
+.two-col {
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center;
+}
+.col-media img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
 
-      <div class="usecase-grid">
-        <div class="usecase">
-          <h3>Бизнесу</h3>
-          <p>Расчёты и учёт в долларах без валютного риска, с проверяемой историей операций.</p>
-        </div>
-        <div class="usecase">
-          <h3>Частным лицам</h3>
-          <p>Стабильная единица для хранения средств внутри регулируемой инфраструктуры.</p>
-        </div>
-        <div class="usecase">
-          <h3>Крипто-пользователям</h3>
-          <p>Долларовая расчётная единица в ончейн-формате, совместимая с Solana-средой.</p>
-        </div>
-        <div class="usecase">
-          <h3>Институционалам</h3>
-          <p>Суверенное обеспечение и открытый реестр — понятная модель для казначейских операций.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+/* CARDS */
+.cards, .adv-grid, .usecase-grid {
+  display: grid; gap: 24px; margin-top: 40px;
+}
+.cards.three { grid-template-columns: repeat(3, 1fr); }
+.adv-grid { grid-template-columns: repeat(2, 1fr); }
+.usecase-grid { grid-template-columns: repeat(4, 1fr); }
 
-  <!-- FAQ -->
-  <section class="faq">
-    <div class="container">
-      <h2>Ответы на частые вопросы</h2>
+.card, .adv, .usecase {
+  background: var(--card); padding: 32px; border-radius: var(--radius);
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+.card:hover, .adv:hover, .usecase:hover { transform: translateY(-4px); }
+.card-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.card strong, .adv strong { color: var(--accent-2); }
 
-      <details>
-        <summary>Зачем нужен HUMO Token?</summary>
-        <p>
-          HUMO Token создан, чтобы предложить рынку надежный, стабильный и
-          прозрачный финансовый инструмент, полностью номинированный в долларах
-          США (USD) и обеспеченный реальными резервами.
-        </p>
-        <p>
-          Цель проекта — развитие регулируемой и безопасной крипто-инфраструктуры
-          на Solana, доступной как для бизнеса, так и для частных пользователей.
-        </p>
-      </details>
+.balance {
+  margin-top: 18px; display: inline-block; padding: 10px 18px;
+  background: rgba(0,195,137,.08); color: var(--accent);
+  border-radius: 10px; font-size: .9rem;
+}
+.balance b { color: var(--accent-2); }
 
-      <details>
-        <summary>Как регулируется HUMO Token?</summary>
-        <p>
-          HUMO Token выпускается и обращается в рамках правил экосистемы
-          Humo token.
-        </p>
-        <p>
-          Стабильный токен полностью соответствует требованиям и действует в
-          правовом поле Humo token.
-        </p>
-        <p>
-          Выпуск зарегистрирован в реестре крипто-активов, учёт прав ведёт
-          лицензированный крипто-депозитарий Solana.
-        </p>
-      </details>
+/* BRIDGE / CTA */
+.bridge {
+  text-align: center;
+  background: linear-gradient(135deg, #0a2540 0%, #00c389 120%);
+  color: #fff;
+}
+.bridge h2 { color: #fff; margin-bottom: 28px; }
+.bridge .btn-primary { background: #fff; color: var(--accent-2); }
 
-      <details>
-        <summary>Чем обеспечен HUMO Token?</summary>
-        <p>
-          HUMO Token полностью обеспечен резервами и номинирован в долларах США (USD).
-        </p>
-        <p>
-          Обеспечение соответствует количеству выпущенных стабильных токенов и
-          проходит регулярные проверки в соответствии с нормативами Humo token.
-        </p>
-        <p>
-          Это гарантирует стабильность и прозрачность HUMO Token для всех
-          пользователей.
-        </p>
-      </details>
+.cta { text-align: center; }
+.cta h2 { max-width: 780px; margin: 0 auto 18px; }
+.cta .btn { margin-top: 28px; }
 
-      <details>
-        <summary>Какой курс HUMO Token?</summary>
-        <p>
-          Номинальная стоимость HUMO Token фиксирована: 1 HUMO Token = 1 USD.
-          По этому соотношению эмитент выпускает и погашает стабильные токены.
-        </p>
-        <p>
-          Этот курс фиксированный и неизменный — он не зависит от рыночных
-          колебаний, внешних или внутренних факторов и остается стабильным со
-          временем.
-        </p>
-      </details>
+/* USECASE TAG */
+.usecase-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  background: rgba(0,195,137,.12); color: var(--accent);
+  font-size: .75rem; font-weight: 600; margin-bottom: 14px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
 
-      <details>
-        <summary>Кто выпускает HUMO Token?</summary>
-        <p>
-          Стабильный токен выпускается ООО «HUMO DIGITAL» — дочерней компанией
-          Национального межбанковского процессингового центра (НМПЦ HUMO),
-          официально зарегистрированной в Humo token.
-        </p>
-      </details>
-    </div>
-  </section>
+/* FAQ */
+details {
+  background: var(--card); padding: 22px 28px; border-radius: var(--radius);
+  border: 1px solid var(--line); margin-bottom: 14px;
+}
+details[open] { box-shadow: var(--shadow); }
+summary {
+  font-weight: 700; cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+}
+summary::after { content: '+'; font-size: 1.4rem; color: var(--accent); }
+details[open] summary::after { content: '−'; }
+details p { margin-top: 12px; }
 
-  <!-- CTA -->
-  <section class="cta" id="contact">
-    <div class="container">
-      <h2>HUMO Token открывает новые возможности для роста торговли и упрощения расчетов</h2>
-      <p>Будем рады ответить на ваши вопросы.</p>
-      <a href="#" class="btn">Скачать документацию</a>
-    </div>
-  </section>
+/* FOOTER */
+.footer { padding: 40px 0; border-top: 1px solid var(--line); background: #fff; }
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.footer-copy { color: var(--muted); font-size: .9rem; }
 
-</body>
-</html>
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .cards.three, .adv-grid, .usecase-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 2.4rem; }
+  .stats { gap: 40px; }
+  h2 { font-size: 1.7rem; }
+}
+@media (max-width: 600px) {
+  .cards.three, .adv-grid, .usecase-grid { grid-template-columns: 1fr; }
+  .hero { padding: 80px 0 60px; }
+  .hero h1 { font-size: 2rem; }
+  .stat-value { font-size: 1.5rem; }
+  section { padding: 60px 0; }
+}
