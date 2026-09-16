@@ -1,181 +1,361 @@
-:root {
-  --bg: #ffffff;
-  --bg-soft: #f6f8fb;
-  --ink: #0e1116;
-  --muted: #5b6472;
-  --line: #e6e9ef;
-  --accent: #00c389;        /* HUMO green */
-  --accent-2: #0a2540;      /* deep navy */
-  --card: #ffffff;
-  --radius: 20px;
-  --shadow: 0 10px 30px rgba(10,37,64,.08);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HUMO Token — Stable Token on Solana</title>
+<meta name="description" content="HUMO Token — stable token backed by reserves on Solana. Ecosystem Asterium. Issuer HUMO CRYPTO." />
+<link rel="icon" type="image/png" href="humo_logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+<!-- ============ TOP TICKER ============ -->
+<div class="ticker ticker-top">
+  <div class="ticker-track">
+    <span>💵 1 HUMO = $0.0001</span>
+    <span>🔒 100% Backed</span>
+    <span>⚡ Powered by Solana</span>
+    <span>🌐 Ecosystem Asterium</span>
+    <span>🏛️ Issuer HUMO CRYPTO</span>
+    <span>💳 HUMO PAY Processing Center</span>
+    <span>💵 1 HUMO = $0.0001</span>
+    <span>🔒 100% Backed</span>
+    <span>⚡ Powered by Solana</span>
+    <span>🌐 Ecosystem Asterium</span>
+    <span>🏛️ Issuer HUMO CRYPTO</span>
+    <span>💳 HUMO PAY Processing Center</span>
+  </div>
+</div>
 
-html { scroll-behavior: smooth; }
+<!-- ============ NAVBAR ============ -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <div class="logo">
+      <img src="humo_logo.png" alt="HUMO Token" class="logo-mark" />
+      <span class="logo-text">HUMO <b>Token</b></span>
+    </div>
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+    <nav class="nav-links">
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#advantages" data-i18n="nav_adv">Advantages</a>
+      <a href="#usecases" data-i18n="nav_use">Use cases</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </nav>
 
-.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    <div class="nav-right">
+      <select id="langSelect" class="lang-select" aria-label="Language">
+        <option value="en" selected>🇬🇧 English</option>
+        <option value="uz">🇺🇿 O'zbekcha</option>
+        <option value="kz">🇰🇿 Қазақша</option>
+        <option value="tj">🇹🇯 Тоҷикӣ</option>
+        <option value="kg">🇰🇬 Кыргызча</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="tm">🇹🇲 Türkmençe</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+      </select>
+      <a href="#contact" class="btn btn-outline" data-i18n="nav_contact">Contact</a>
+    </div>
+  </div>
+</header>
 
-h1, h2, h3 { line-height: 1.2; font-weight: 800; letter-spacing: -.01em; }
-h2 { font-size: 2.2rem; margin-bottom: 16px; }
-h3 { font-size: 1.15rem; margin-bottom: 8px; }
-p  { color: var(--muted); }
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="hero-bg.jpg.jpg" alt="" />
+  </div>
+  <div class="container hero-inner">
+    <h1 data-i18n="hero_title">Stable token backed by reserves on Solana</h1>
+    <p class="subtitle" data-i18n="hero_sub">
+      A new crypto asset for the Humo token financial ecosystem that makes financial operations secure and transparent.
+    </p>
 
-.section-lead { max-width: 720px; margin-bottom: 40px; }
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label" data-i18n="stat_label_1">nominal value of one token</span>
+        <span class="stat-value">$0.0001</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="stat_label_2">issuance backing</span>
+        <span class="stat-value">100%</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="stat_label_3">issuance &amp; redemption</span>
+        <span class="stat-value">1:1</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* NAVBAR */
-.navbar {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(255,255,255,.85);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-}
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  height: 72px;
-}
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-mark { width: 32px; height: 32px; }
-.logo-text { font-weight: 700; font-size: 1.05rem; }
-.logo-text b { color: var(--accent); }
-.nav-links { display: flex; gap: 28px; }
-.nav-links a {
-  color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem;
-}
-.nav-links a:hover { color: var(--accent); }
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container two-col">
+    <div class="col-text">
+      <h2 data-i18n="about_title">HUMO Token is a backed stable token issued with the support of Asterium</h2>
+      <p data-i18n="about_p1">
+        It is fully backed by reserves denominated in US dollars, which eliminates currency risks and ensures reliable control over the stable token.
+      </p>
+      <p data-i18n="about_p2">
+        The issuance and circulation of HUMO Token are regulated and controlled in accordance with the rules of the Humo token ecosystem.
+      </p>
+    </div>
+    <div class="col-media">
+      <img src="about-card.jpg" alt="HUMO Token" />
+    </div>
+  </div>
+</section>
 
-/* BUTTONS */
-.btn {
-  display: inline-block; padding: 12px 24px; border-radius: 10px;
-  font-weight: 600; text-decoration: none; transition: all .2s;
-  font-size: .95rem;
-}
-.btn-outline { border: 1px solid var(--ink); color: var(--ink); }
-.btn-outline:hover { background: var(--ink); color: #fff; }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+<!-- ============ WHAT'S BEHIND ============ -->
+<section class="behind">
+  <div class="container">
+    <h2 data-i18n="behind_title">What stands behind the stable token</h2>
+    <p class="section-lead" data-i18n="behind_lead">
+      HUMO Token is a backed stable token issued with the support of Asterium. Behind every issued token stands a real reserve, not a market asset.
+    </p>
 
-/* HERO */
-.hero {
-  position: relative; padding: 120px 0 100px; overflow: hidden;
-  background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 100%);
-}
-.hero-bg {
-  position: absolute; inset: 0; opacity: .18; pointer-events: none;
-}
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-.hero-inner { position: relative; text-align: center; }
-.hero h1 { font-size: 3.4rem; margin-bottom: 22px; }
-.hero .subtitle {
-  max-width: 640px; margin: 0 auto 56px; font-size: 1.1rem; color: var(--muted);
-}
+    <div class="cards three">
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3 data-i18n="card_reserve_t">Reserves</h3>
+        <p><strong>100%</strong> — <span data-i18n="card_reserve_d">internal and external audits</span></p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💵</div>
+        <h3 data-i18n="card_nominal_t">Nominal</h3>
+        <p><strong>$0.0001</strong> — <span data-i18n="card_nominal_d">fixed, not market-dependent</span></p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏛️</div>
+        <h3 data-i18n="card_issuer_t">Issuer</h3>
+        <p><strong>HUMO CRYPTO</strong> — <span data-i18n="card_issuer_d">owner of HUMO PAY</span></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-.stats {
-  display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
-}
-.stat { display: flex; flex-direction: column; align-items: center; }
-.stat-label { color: var(--muted); font-size: .85rem; margin-bottom: 8px; text-align: center; }
-.stat-value { font-size: 2rem; font-weight: 800; color: var(--accent-2); }
+<!-- ============ ADVANTAGES ============ -->
+<section class="advantages" id="advantages">
+  <div class="container">
+    <h2 data-i18n="adv_title">Key advantages</h2>
 
-/* SECTION BASE */
-section { padding: 90px 0; }
-.about, .usecases { background: #fff; }
-.behind, .advantages, .faq { background: var(--bg-soft); }
+    <div class="adv-grid">
+      <article class="adv">
+        <h3 data-i18n="adv_1_t">Reliability</h3>
+        <p data-i18n="adv_1_d">
+          Every HUMO Token is backed by reserves. The backing is regularly confirmed by internal and external audits.
+        </p>
+        <div class="balance">HUMO Token <b>42.50 HUMO</b></div>
+      </article>
 
-/* TWO COL */
-.two-col {
-  display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center;
-}
-.col-media img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+      <article class="adv">
+        <h3 data-i18n="adv_2_t">Innovative platform</h3>
+        <p data-i18n="adv_2_d">
+          We use the capabilities of the Solana blockchain to ensure maximum speed, low fees, and security of HUMO Token.
+        </p>
+      </article>
 
-/* CARDS */
-.cards, .adv-grid, .usecase-grid {
-  display: grid; gap: 24px; margin-top: 40px;
-}
-.cards.three { grid-template-columns: repeat(3, 1fr); }
-.adv-grid { grid-template-columns: repeat(2, 1fr); }
-.usecase-grid { grid-template-columns: repeat(4, 1fr); }
+      <article class="adv">
+        <h3 data-i18n="adv_3_t">Transparency</h3>
+        <p data-i18n="adv_3_d1">
+          All information about HUMO Token transactions is openly available in the Solana distributed ledger.
+        </p>
+        <p data-i18n="adv_3_d2">
+          HUMO Token is registered in the crypto-asset registry of Humo token.
+        </p>
+        <p data-i18n="adv_3_d3">
+          Data about the stable token is also placed in the Asterium crypto-depository, ensuring full verifiability and transparency.
+        </p>
+      </article>
 
-.card, .adv, .usecase {
-  background: var(--card); padding: 32px; border-radius: var(--radius);
-  border: 1px solid var(--line); box-shadow: var(--shadow);
-  transition: transform .2s;
-}
-.card:hover, .adv:hover, .usecase:hover { transform: translateY(-4px); }
-.card-icon { font-size: 1.8rem; margin-bottom: 12px; }
-.card strong, .adv strong { color: var(--accent-2); }
+      <article class="adv">
+        <h3 data-i18n="adv_4_t">Ease of use</h3>
+        <p data-i18n="adv_4_d">
+          HUMO Token integrates easily with the Asterium ecosystem. You can buy and redeem HUMO Token directly via Asterium Wallet, a partner bank, or an authorized provider — fast, convenient, and secure.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
-.balance {
-  margin-top: 18px; display: inline-block; padding: 10px 18px;
-  background: rgba(0,195,137,.08); color: var(--accent);
-  border-radius: 10px; font-size: .9rem;
-}
-.balance b { color: var(--accent-2); }
+<!-- ============ BRIDGE ============ -->
+<section class="bridge">
+  <div class="container bridge-inner">
+    <h2 data-i18n="bridge_title">We are building a bridge between traditional finance and the digital future</h2>
+    <a href="#contact" class="btn btn-primary" data-i18n="bridge_btn">Contact us</a>
+  </div>
+</section>
 
-/* BRIDGE / CTA */
-.bridge {
-  text-align: center;
-  background: linear-gradient(135deg, #0a2540 0%, #00c389 120%);
-  color: #fff;
-}
-.bridge h2 { color: #fff; margin-bottom: 28px; }
-.bridge .btn-primary { background: #fff; color: var(--accent-2); }
+<!-- ============ USE CASES ============ -->
+<section class="usecases" id="usecases">
+  <div class="container">
+    <h2 data-i18n="use_title">One token — many use cases</h2>
+    <p class="section-lead" data-i18n="use_lead">
+      The instrument is designed for both businesses and individuals: a dollar-denominated unit of account whose movement is visible on the ledger.
+    </p>
 
-.cta { text-align: center; }
-.cta h2 { max-width: 780px; margin: 0 auto 18px; }
-.cta .btn { margin-top: 28px; }
+    <div class="usecase-grid">
+      <div class="usecase">
+        <div class="usecase-tag" data-i18n="use_tag_1">Business</div>
+        <h3 data-i18n="use_1_t">For business</h3>
+        <p data-i18n="use_1_d">Settlements and accounting in USD without currency risk, with a verifiable transaction history.</p>
+      </div>
+      <div class="usecase">
+        <div class="usecase-tag" data-i18n="use_tag_2">Individuals</div>
+        <h3 data-i18n="use_2_t">For individuals</h3>
+        <p data-i18n="use_2_d">A stable unit for storing funds within regulated infrastructure.</p>
+      </div>
+      <div class="usecase">
+        <div class="usecase-tag" data-i18n="use_tag_3">Crypto</div>
+        <h3 data-i18n="use_3_t">For crypto users</h3>
+        <p data-i18n="use_3_d">A USD-denominated unit of account in on-chain format, compatible with the Solana environment.</p>
+      </div>
+      <div class="usecase">
+        <div class="usecase-tag" data-i18n="use_tag_4">Institutions</div>
+        <h3 data-i18n="use_4_t">For institutions</h3>
+        <p data-i18n="use_4_d">Sovereign backing and an open ledger — a clear model for treasury operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* USECASE TAG */
-.usecase-tag {
-  display: inline-block; padding: 4px 12px; border-radius: 999px;
-  background: rgba(0,195,137,.12); color: var(--accent);
-  font-size: .75rem; font-weight: 600; margin-bottom: 14px;
-  text-transform: uppercase; letter-spacing: .04em;
-}
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 data-i18n="faq_title">Frequently asked questions</h2>
 
-/* FAQ */
-details {
-  background: var(--card); padding: 22px 28px; border-radius: var(--radius);
-  border: 1px solid var(--line); margin-bottom: 14px;
-}
-details[open] { box-shadow: var(--shadow); }
-summary {
-  font-weight: 700; cursor: pointer; list-style: none;
-  display: flex; justify-content: space-between; align-items: center;
-}
-summary::after { content: '+'; font-size: 1.4rem; color: var(--accent); }
-details[open] summary::after { content: '−'; }
-details p { margin-top: 12px; }
+    <details>
+      <summary data-i18n="faq_1_q">Why is HUMO Token needed?</summary>
+      <p data-i18n="faq_1_a1">
+        HUMO Token was created to offer the market a reliable, stable, and transparent financial instrument, fully denominated in US dollars and backed by real reserves.
+      </p>
+      <p data-i18n="faq_1_a2">
+        The project's goal is to develop regulated and secure crypto infrastructure on Solana, accessible to both businesses and individuals.
+      </p>
+    </details>
 
-/* FOOTER */
-.footer { padding: 40px 0; border-top: 1px solid var(--line); background: #fff; }
-.footer-inner {
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-}
-.footer-copy { color: var(--muted); font-size: .9rem; }
+    <details>
+      <summary data-i18n="faq_2_q">How is HUMO Token regulated?</summary>
+      <p data-i18n="faq_2_a1">
+        HUMO Token is issued and circulated under the rules of the Humo token ecosystem and the Asterium ecosystem.
+      </p>
+      <p data-i18n="faq_2_a2">
+        The stable token fully complies with requirements and operates within the legal framework of Humo token.
+      </p>
+      <p data-i18n="faq_2_a3">
+        The issuance is registered in the crypto-asset registry; rights are recorded by the licensed Asterium crypto-depository.
+      </p>
+    </details>
 
-/* RESPONSIVE */
-@media (max-width: 960px) {
-  .nav-links { display: none; }
-  .two-col { grid-template-columns: 1fr; gap: 32px; }
-  .cards.three, .adv-grid, .usecase-grid { grid-template-columns: 1fr 1fr; }
-  .hero h1 { font-size: 2.4rem; }
-  .stats { gap: 40px; }
-  h2 { font-size: 1.7rem; }
-}
-@media (max-width: 600px) {
-  .cards.three, .adv-grid, .usecase-grid { grid-template-columns: 1fr; }
-  .hero { padding: 80px 0 60px; }
-  .hero h1 { font-size: 2rem; }
-  .stat-value { font-size: 1.5rem; }
-  section { padding: 60px 0; }
-}
+    <details>
+      <summary data-i18n="faq_3_q">What backs HUMO Token?</summary>
+      <p data-i18n="faq_3_a1">
+        HUMO Token is fully backed by reserves and denominated in US dollars.
+      </p>
+      <p data-i18n="faq_3_a2">
+        The backing corresponds to the number of issued stable tokens and undergoes regular checks in accordance with Humo token regulations.
+      </p>
+      <p data-i18n="faq_3_a3">
+        This guarantees the stability and transparency of HUMO Token for all users.
+      </p>
+    </details>
+
+    <details>
+      <summary data-i18n="faq_4_q">What is the price of HUMO Token?</summary>
+      <p data-i18n="faq_4_a1">
+        The nominal value of HUMO Token is fixed: 1 HUMO Token = $0.0001. At this ratio, the issuer issues and redeems stable tokens.
+      </p>
+      <p data-i18n="faq_4_a2">
+        This rate is fixed and unchanging — it does not depend on market fluctuations, external or internal factors, and remains stable over time.
+      </p>
+    </details>
+
+    <details>
+      <summary data-i18n="faq_5_q">Who issues HUMO Token?</summary>
+      <p data-i18n="faq_5_a1">
+        The stable token is issued by HUMO CRYPTO — owner of HUMO PAY (the processing center of the Asterium ecosystem), officially registered in Humo token.
+      </p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="contact">
+  <div class="container cta-inner">
+    <h2 data-i18n="cta_title">HUMO Token opens new opportunities for trade growth and simplified settlements</h2>
+    <p data-i18n="cta_sub">We will be glad to answer your questions.</p>
+    <a href="#" class="btn btn-primary" data-i18n="cta_btn">Download documentation</a>
+  </div>
+</section>
+
+<!-- ============ COUNTER ============ -->
+<section class="counter-section">
+  <div class="container counter-inner">
+
+    <div class="counter-item">
+      <div class="counter-icon">👥</div>
+      <div class="counter-info">
+        <span class="counter-label" data-i18n="counter_visitors_label">Total Visitors</span>
+        <span class="counter-value counter-visitors">0</span>
+        <span class="counter-time counter-visitor-time">Updated: —</span>
+      </div>
+    </div>
+
+    <div class="counter-item">
+      <div class="counter-icon">✅</div>
+      <div class="counter-info">
+        <span class="counter-label" data-i18n="counter_clients_label">Verified Clients</span>
+        <span class="counter-value counter-clients">0</span>
+        <span class="counter-time counter-client-time">Verified: —</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="logo">
+      <img src="humo_logo.png" alt="HUMO Token" class="logo-mark" />
+      <span class="logo-text">HUMO <b>Token</b></span>
+    </div>
+    <p class="footer-copy" data-i18n="footer_copy">© 2026 HUMO CRYPTO. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ BOTTOM TICKER ============ -->
+<div class="ticker ticker-bottom">
+  <div class="ticker-track">
+    <span>💵 1 HUMO = $0.0001</span>
+    <span>🔒 100% Backed</span>
+    <span>⚡ Powered by Solana</span>
+    <span>🌐 Ecosystem Asterium</span>
+    <span>🏛️ Issuer HUMO CRYPTO</span>
+    <span>💳 HUMO PAY Processing Center</span>
+    <span>💵 1 HUMO = $0.0001</span>
+    <span>🔒 100% Backed</span>
+    <span>⚡ Powered by Solana</span>
+    <span>🌐 Ecosystem Asterium</span>
+    <span>🏛️ Issuer HUMO CRYPTO</span>
+    <span>💳 HUMO PAY Processing Center</span>
+  </div>
+</div>
+
+<script src="i18n.js"></script>
+<script src="counter.js"></script>
+<script>
+  const select = document.getElementById('langSelect');
+  select.addEventListener('change', (e) => {
+    setLanguage(e.target.value);
+    document.documentElement.lang = e.target.value;
+  });
+  setLanguage('en');
+</script>
+
+</body>
+</html>
