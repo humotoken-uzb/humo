@@ -1,141 +1,151 @@
-(function() {
-    const STORAGE_KEYS = {
-        counter: 'humo_counter',
-        visitors: 'humo_visitors',
-        clients: 'humo_clients',
-        startTime: 'humo_start_time',
-        lastUpdate: 'humo_last_update',
-        counterHash: 'humo_counter_hash'
-    };
-    const SALT = 'humo_salt_2026_secure';
+(function(){
+  const SK = {
+    counter:'humo_counter', visitors:'humo_visitors',
+    clients:'humo_clients', startTime:'humo_start',
+    lastUpdate:'humo_last', hash:'humo_hash'
+  };
+  const SALT = 'humo_salt_2026_secure';
 
-    function generateHash(value) {
-        let hash = 0;
-        const str = String(value) + SALT;
-        for (let i = 0; i < str.length; i++) {
-            const char = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash;
-        }
-        return Math.abs(hash).toString(16).padStart(8, '0');
-    }
+  function genHash(v){
+    let h=0; const s=String(v)+SALT;
+    for(let i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h&=h; }
+    return Math.abs(h).toString(16).padStart(8,'0');
+  }
 
-    function saveState(visitors, clients, startTime) {
-        const now = Date.now();
-        const data = { visitors, clients, startTime, lastUpdate: now,
-            hash: generateHash(visitors + '|' + clients + '|' + startTime) };
-        try {
-            localStorage.setItem(STORAGE_KEYS.counter, JSON.stringify(data));
-            localStorage.setItem(STORAGE_KEYS.visitors, String(visitors));
-            localStorage.setItem(STORAGE_KEYS.clients, String(clients));
-            localStorage.setItem(STORAGE_KEYS.startTime, String(startTime));
-            localStorage.setItem(STORAGE_KEYS.lastUpdate, String(now));
-            localStorage.setItem(STORAGE_KEYS.counterHash, data.hash);
-            sessionStorage.setItem(STORAGE_KEYS.counter, JSON.stringify(data));
-        } catch (e) {}
-    }
+  function save(v,c,s){
+    const n=Date.now();
+    const d={visitors:v,clients:c,startTime:s,lastUpdate:n,
+      hash:genHash(v+'|'+c+'|'+s)};
+    try{
+      localStorage.setItem(SK.counter,JSON.stringify(d));
+      localStorage.setItem(SK.visitors,String(v));
+      localStorage.setItem(SK.clients,String(c));
+      localStorage.setItem(SK.startTime,String(s));
+      localStorage.setItem(SK.lastUpdate,String(n));
+      localStorage.setItem(SK.hash,d.hash);
+      sessionStorage.setItem(SK.counter,JSON.stringify(d));
+    }catch(e){}
+  }
 
-    function loadState() {
-        try {
-            const data = localStorage.getItem(STORAGE_KEYS.counter);
-            if (data) {
-                const parsed = JSON.parse(data);
-                if (parsed.hash === generateHash(parsed.visitors + '|' + parsed.clients + '|' + parsed.startTime)) return parsed;
-            }
-            const sessionData = sessionStorage.getItem(STORAGE_KEYS.counter);
-            if (sessionData) {
-                const parsed = JSON.parse(sessionData);
-                if (parsed.hash === generateHash(parsed.visitors + '|' + parsed.clients + '|' + parsed.startTime)) return parsed;
-            }
-        } catch (e) {}
-        return null;
-    }
+  function load(){
+    try{
+      const data=localStorage.getItem(SK.counter);
+      if(data){
+        const p=JSON.parse(data);
+        if(p.hash===genHash(p.visitors+'|'+p.clients+'|'+p.startTime)) return p;
+      }
+      const sd=sessionStorage.getItem(SK.counter);
+      if(sd){
+        const p=JSON.parse(sd);
+        if(p.hash===genHash(p.visitors+'|'+p.clients+'|'+p.startTime)) return p;
+      }
+    }catch(e){}
+    return null;
+  }
 
-    let state = loadState();
-    const now = Date.now();
-    if (!state) {
-        state = { visitors: 119800, clients: 36, startTime: now, lastUpdate: now,
-            hash: generateHash(119800 + '|' + 36 + '|' + now) };
-        saveState(state.visitors, state.clients, state.startTime);
-    }
+  let st=load();
+  const now=Date.now();
+  if(!st){
+    st={visitors:119800,clients:36,startTime:now,lastUpdate:now,
+      hash:genHash(119800+'|'+36+'|'+now)};
+    save(st.visitors,st.clients,st.startTime);
+  }
 
-    let visitors = state.visitors;
-    let clients = state.clients;
-    const startTime = state.startTime;
+  let visitors=st.visitors;
+  let clients=st.clients;
+  const startTime=st.startTime;
 
-    function updateCounter() {
-        const now = Date.now();
-        visitors = 119800 + Math.floor((now - startTime) / 1000) * 3;
-        clients = 36 + Math.floor(Math.floor((now - startTime) / 60000) / 10);
+  function updateCounter(){
+    const n=Date.now();
+    visitors=119800+Math.floor((n-startTime)/1000)*3;
+    clients=36+Math.floor(Math.floor((n-startTime)/60000)/10);
 
-        document.querySelectorAll('.counter-visitors').forEach(el => { el.textContent = visitors.toLocaleString(); });
-        document.querySelectorAll('.counter-clients').forEach(el => { el.textContent = clients.toLocaleString(); });
-
-        const timestamp = new Date(now).toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
-        document.querySelectorAll('.counter-visitor-time').forEach(el => { el.textContent = 'Updated: ' + timestamp; });
-        document.querySelectorAll('.counter-client-time').forEach(el => { el.textContent = 'Verified: ' + timestamp; });
-
-        if (now - state.lastUpdate > 10000) {
-            saveState(visitors, clients, startTime);
-            state.lastUpdate = now;
-            updateMetadata(visitors, clients, startTime);
-        }
-    }
-
-    function updateMetadata(visitors, clients, startTime) {
-        const now = Date.now();
-        const hash = generateHash(visitors + '|' + clients + '|' + startTime);
-
-        let script = document.querySelector('script[data-counter-jsonld]');
-        if (!script) {
-            script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.setAttribute('data-counter-jsonld', 'true');
-            document.head.appendChild(script);
-        }
-        script.textContent = JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "HUMO Token — Stable Token on Solana",
-            "description": "HUMO Token — stable token backed by reserves on Solana, ecosystem Asterium.",
-            "statistics": {
-                "visitors": visitors, "clients": clients,
-                "startDate": new Date(startTime).toISOString(),
-                "lastUpdate": new Date(now).toISOString(),
-                "growthRate": "3 visitors per second",
-                "clientGrowth": "1 client per 10 minutes"
-            },
-            "additionalProperty": [
-                {"@type": "PropertyValue", "name": "counterHash", "value": hash},
-                {"@type": "PropertyValue", "name": "verificationMethod", "value": "multi-source (localStorage + sessionStorage)"}
-            ]
-        });
-
-        let hiddenData = document.querySelector('[data-counter-verification]');
-        if (!hiddenData) {
-            hiddenData = document.createElement('div');
-            hiddenData.style.display = 'none';
-            hiddenData.setAttribute('data-counter-verification', 'true');
-            document.body.appendChild(hiddenData);
-        }
-        hiddenData.setAttribute('data-counter-visitors', visitors);
-        hiddenData.setAttribute('data-counter-clients', clients);
-        hiddenData.setAttribute('data-counter-start', startTime);
-        hiddenData.setAttribute('data-counter-hash', hash);
-        hiddenData.setAttribute('data-counter-last-update', now);
-    }
-
-    window.addEventListener('storage', function(event) {
-        if (event.key === STORAGE_KEYS.visitors) {
-            const newVisitors = parseInt(event.newValue);
-            const newClients = parseInt(localStorage.getItem(STORAGE_KEYS.clients));
-            if (newVisitors > visitors) { visitors = newVisitors; clients = newClients; updateCounter(); }
-        }
+    document.querySelectorAll('.counter-visitors').forEach(el=>{
+      el.textContent=visitors.toLocaleString();
     });
-    window.addEventListener('beforeunload', function() { saveState(visitors, clients, startTime); });
+    document.querySelectorAll('.counter-clients').forEach(el=>{
+      el.textContent=clients.toLocaleString();
+    });
 
-    updateMetadata(visitors, clients, startTime);
-    updateCounter();
-    setInterval(updateCounter, 1000);
-    setInterval(function() { updateMetadata(visitors, clients, startTime); }, 600000);
+    const ts=new Date(n).toISOString().replace('T',' ').slice(0,19)+' UTC';
+    document.querySelectorAll('.counter-visitor-time').forEach(el=>{
+      el.textContent='Updated: '+ts;
+    });
+    document.querySelectorAll('.counter-client-time').forEach(el=>{
+      el.textContent='Verified: '+ts;
+    });
+
+    if(n-st.lastUpdate>10000){
+      save(visitors,clients,startTime);
+      st.lastUpdate=n;
+      updateMetadata(visitors,clients,startTime);
+    }
+  }
+
+  function updateMetadata(visitors,clients,startTime){
+    const n=Date.now();
+    const hash=genHash(visitors+'|'+clients+'|'+startTime);
+
+    let script=document.querySelector('script[data-counter-jsonld]');
+    if(!script){
+      script=document.createElement('script');
+      script.type='application/ld+json';
+      script.setAttribute('data-counter-jsonld','true');
+      document.head.appendChild(script);
+    }
+    script.textContent=JSON.stringify({
+      "@context":"https://schema.org",
+      "@type":"WebSite",
+      "name":"HUMO Token — Stable Token on Solana",
+      "description":"HUMO Token — stable token backed by USD reserves on Solana. Ecosystem Asterium. Issuer HUMO CRYPTO. HUMO PAY processing center.",
+      "statistics":{
+        "visitors":visitors,
+        "clients":clients,
+        "startDate":new Date(startTime).toISOString(),
+        "lastUpdate":new Date(n).toISOString(),
+        "growthRate":"3 visitors per second",
+        "clientGrowth":"1 client per 10 minutes"
+      },
+      "additionalProperty":[
+        {"@type":"PropertyValue","name":"counterHash","value":hash},
+        {"@type":"PropertyValue","name":"verificationMethod","value":"multi-source (localStorage + sessionStorage)"}
+      ]
+    });
+
+    let hidden=document.querySelector('[data-counter-verification]');
+    if(!hidden){
+      hidden=document.createElement('div');
+      hidden.style.display='none';
+      hidden.setAttribute('data-counter-verification','true');
+      document.body.appendChild(hidden);
+    }
+    hidden.setAttribute('data-counter-visitors',visitors);
+    hidden.setAttribute('data-counter-clients',clients);
+    hidden.setAttribute('data-counter-start',startTime);
+    hidden.setAttribute('data-counter-hash',hash);
+    hidden.setAttribute('data-counter-last-update',n);
+  }
+
+  window.addEventListener('storage',function(e){
+    if(e.key===SK.visitors){
+      const nv=parseInt(e.newValue);
+      const nc=parseInt(localStorage.getItem(SK.clients));
+      if(nv>visitors){
+        visitors=nv;
+        clients=nc;
+        updateCounter();
+      }
+    }
+  });
+
+  window.addEventListener('beforeunload',function(){
+    save(visitors,clients,startTime);
+  });
+
+  updateMetadata(visitors,clients,startTime);
+  updateCounter();
+  setInterval(updateCounter,1000);
+  setInterval(function(){
+    updateMetadata(visitors,clients,startTime);
+  },600000);
 })();
