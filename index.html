@@ -157,12 +157,12 @@
   </div>
 </section>
 
-<!-- ============ BUY SECTION ============ -->
+<!-- BUY SECTION -->
 <section class="buy-section" id="buy">
   <div class="container">
     <h2 data-i18n="buy_title">How to buy $HUMO</h2>
     <p class="section-lead" data-i18n="buy_lead">
-      Two ways to get USDC on Solana: through a crypto exchange, or with cash via Paynet kiosks.
+      Three legal ways to get USDC or SOL on Solana in Uzbekistan: cash via Paynet, licensed exchange via Coinpay, or fiat gateway via CityPay.
     </p>
 
     <!-- METHOD 1: PAYNET -->
@@ -188,42 +188,41 @@
       </div>
     </div>
 
-    <!-- METHOD 2: EXCHANGE -->
+    <!-- METHOD 2: COINPAY -->
     <div class="buy-method">
       <div class="buy-method-header">
-        <span class="buy-method-badge" data-i18n="buy_method_card">Card / Bank</span>
-        <h3 data-i18n="buy_exchange_title">Method 2 — Buy USDC with your local currency</h3>
+        <span class="buy-method-badge" data-i18n="buy_method_licensed">Licensed</span>
+        <h3 data-i18n="buy_coinpay_title">Method 2 — Buy via Coinpay (licensed Binance gateway)</h3>
       </div>
-      <div class="buy-currencies">
-        <a href="https://p2p.binance.com/en/trade/all-payments/USDC?fiat=UZS" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇺🇿</span><span class="code">UZS (Binance P2P)</span>
-        </a>
-        <a href="https://www.bitget.com/ru/p2p" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇺🇿</span><span class="code">UZS (Bitget P2P)</span>
-        </a>
-        <a href="https://t.me/wallet" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇺🇿</span><span class="code">UZS (Wallet)</span>
-        </a>
-        <a href="https://www.binance.com/ru-KZ" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇰🇿</span><span class="code">KZT</span>
-        </a>
-        <a href="https://www.binance.com" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇰🇬</span><span class="code">KGS</span>
-        </a>
-        <a href="https://www.bybit.com" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇹🇯</span><span class="code">TJS</span>
-        </a>
-        <a href="https://www.moonpay.com/buy/usdc" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇺🇸</span><span class="code">USD</span>
-        </a>
-        <a href="https://www.moonpay.com/buy/usdc" target="_blank" rel="noopener" class="currency-btn">
-          <span class="flag">🇪🇺</span><span class="code">EUR</span>
-        </a>
-      </div>
-      <div class="buy-step-note" data-i18n="buy_exchange_note">After buying USDC, swap it for HUMO on Jupiter.</div>
+      <ol class="paynet-steps">
+        <li data-i18n="buy_coinpay_step1">Register at <strong>coinpay.uz</strong> — the official licensed gateway to Binance in Uzbekistan.</li>
+        <li data-i18n="buy_coinpay_step2">Top up your balance in <strong>UZS</strong> via Humo/Uzcard bank card.</li>
+        <li data-i18n="buy_coinpay_step3">Buy <strong>USDT</strong> or <strong>SOL</strong> on the exchange inside Coinpay.</li>
+        <li data-i18n="buy_coinpay_step4">Withdraw SOL to your <strong>Jupiter wallet</strong> (Phantom or Solflare).</li>
+        <li data-i18n="buy_coinpay_step5">Open <strong>Jupiter Swap</strong> and exchange SOL for <strong>HUMO</strong>.</li>
+      </ol>
       <div class="swap-buttons">
-        <a href="https://jup.ag/swap/USDC-HK37Dqw9Cjhk2wPjfNqB1sU6aFQLCU7cuwEoUgq5C5NU" target="_blank" rel="noopener" class="btn btn-primary">⚡ Swap USDC → HUMO</a>
-        <a href="https://www.geckoterminal.com/solana/pools/GyisDdMtcj9ognrPiuB95b1tHeHpNSq3qZVmPgtF9FuJ" target="_blank" rel="noopener" class="btn btn-outline">📊 View chart</a>
+        <a href="https://coinpay.uz" target="_blank" rel="noopener" class="btn btn-primary">→ Go to Coinpay.uz</a>
+        <a href="https://jup.ag/swap/SOL-HK37Dqw9Cjhk2wPjfNqB1sU6aFQLCU7cuwEoUgq5C5NU" target="_blank" rel="noopener" class="btn btn-outline">⚡ Jupiter Swap</a>
+      </div>
+    </div>
+
+    <!-- METHOD 3: CITYPAY -->
+    <div class="buy-method">
+      <div class="buy-method-header">
+        <span class="buy-method-badge" data-i18n="buy_method_licensed">Licensed</span>
+        <h3 data-i18n="buy_citypay_title">Method 3 — Buy via CityPay (fiat gateway)</h3>
+      </div>
+      <ol class="paynet-steps">
+        <li data-i18n="buy_citypay_step1">Register at <strong>citypay.io</strong> — licensed crypto shop with UZS support.</li>
+        <li data-i18n="buy_citypay_step2">Top up via <strong>Humo card</strong>, <strong>Uzcard</strong>, or <strong>Paynet</strong>.</li>
+        <li data-i18n="buy_citypay_step3">Buy <strong>SOL (Solana)</strong> directly in the CityPay wallet.</li>
+        <li data-i18n="buy_citypay_step4">Send SOL to your <strong>Jupiter wallet</strong>.</li>
+        <li data-i18n="buy_citypay_step5">Swap SOL for <strong>HUMO</strong> on Jupiter.</li>
+      </ol>
+      <div class="swap-buttons">
+        <a href="https://citypay.io" target="_blank" rel="noopener" class="btn btn-primary">→ Go to CityPay.io</a>
+        <a href="https://jup.ag/swap/SOL-HK37Dqw9Cjhk2wPjfNqB1sU6aFQLCU7cuwEoUgq5C5NU" target="_blank" rel="noopener" class="btn btn-outline">⚡ Jupiter Swap</a>
       </div>
     </div>
 
@@ -401,4 +400,4 @@
 </script>
 
 </body>
-</html>
+  </html>
